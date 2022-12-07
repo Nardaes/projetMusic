@@ -1,5 +1,5 @@
 # projetMusic
-Création d'un site de reservation de cours de music
+Création d'un site de réservation de cours de music
 
 ## Première Maquette :
 
