@@ -70,3 +70,9 @@ CREATE TABLE DISPO(
    FOREIGN KEY(Id_Prof) REFERENCES PROF(Id_Prof),
    FOREIGN KEY(Id_disponibilite) REFERENCES DISPONIBILITE(Id_disponibilite)
 );
+
+## Premiére Donnée :
+INSERT INTO `PROF` (`Id_Prof`, `NOM`, `PRENOM`, `DESCRIPTION`) VALUES ('1', 'ProfTest', 'TestProf', 'Un prof de Test');
+INSERT INTO `UTILISATEUR` (`Id_utilisateur`, `NOM`, `ADRESSE`, `MDP`) VALUES ('1', 'Jeremy', 'Jeremy Home', 'Jeremy mdp'), ('2', 'Thibault', 'Thibault Home', 'Thibault mdp');
+INSERT INTO `INSTRUMENT` (`Id_instrument`, `NOM_INSTRU`, `FAMILLE`) VALUES ('1', 'Clarinette', 'vent'), ('2', 'Piano', 'cordes'), ('3', 'saxophone', 'vent'), ('4', 'guitar', 'cordes');
+INSERT INTO `PROF` (`Id_Prof`, `NOM`, `PRENOM`, `DESCRIPTION`) VALUES ('2', 'Michel', 'MichelP', 'C\'est Michel'), ('3', 'Hugo', 'HugoP', 'Hugo c\'est un prof');
