@@ -2377,3 +2377,7 @@ responsive
     opacity: 0;
   }
 }
+.reservationForm {
+  width: 30%;
+  margin-left: 50px;
+}
