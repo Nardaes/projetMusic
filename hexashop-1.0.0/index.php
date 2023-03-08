@@ -1,3 +1,13 @@
+<?php
+
+$db = new PDO('mysql:host=localhost;dbname=projetmusicbd;charset=utf8', 'root', 'root');
+$test = $db->prepare('SELECT * FROM prof');
+$test->execute();
+$lestest = $test->fetchAll();
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -424,10 +434,6 @@
                 <div class="col-lg-12">
                     <div class="under-footer">
                         <p>Copyright © 2022 HexaShop Co., Ltd. All Rights Reserved. 
-                        
-                        <br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a>
-
-                        <br>Distributed By: <a href="https://themewagon.com" target="_blank" title="free & premium responsive templates">ThemeWagon</a></p>
                         <ul>
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
