@@ -1,3 +1,7 @@
+<?php 
+    $db = new PDO('mysql:host=localhost;dbname=projetmusicbd;charset=utf8', 'root', 'root');
+    // $db = new PDO('mysql:host=10.31.184.99;dbname=musique;charset=utf8', 'jojo', 'dio');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,17 +68,30 @@
     <!-- ***** Main Banner Area Start ***** -->
     <div class="main-banner" id="top">
         <div class="reservationForm">
-            <form>
+            <form action="formReservation.php" method="GET">
                 <div class="form-group">
                     <label>Instrument :</label>
-                    <select class="form-control">
-
+                    
+                    <select id="select1" class="form-control" action = "updateSelect2()">
+                        <option value="">Choisir un instrument</option>
+                        <?php 
+                            $instruments = $db->prepare('SELECT * FROM instrument');
+                            $instruments->execute();
+                            $lesinstruments = $instruments->fetchAll();
+                    
+                            foreach ($lesinstruments as $instru){
+                                echo "<option value=". $instru["NOM_INSTRU"] . ">" . $instru["NOM_INSTRU"] ."</option>";
+                            }
+                            
+                            
+                        
+                        ?>
                     </select>
                 </div>
                 
                 <div class="form-group">
                     <label>Professeur :</label>
-                    <select class="form-control">
+                    <select id="select2" class="form-control">
 
                     </select>
                 </div>
@@ -196,6 +213,29 @@
             });
         });
 
+    </script>
+
+
+    <script>
+
+        var select1 = document.getElementById("select1");
+        var select2 = document.getElementById("select2");
+
+
+        select1.addEventListener("change", updateSelect2);
+
+        function updateSelect2() {
+            var nbrselect = select1.selectedIndex;
+            var selectedOption = select1.options[nbrselect];
+
+            // Supprimer les options précédentes
+            // while (select2.firstChild) {
+            //     select2.removeChild(select2.firstChild);
+            // }
+            
+            console.log(selectedOption.value);
+
+        }
     </script>
 
   </body>
