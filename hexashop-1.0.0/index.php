@@ -1,13 +1,3 @@
-<?php
-
-$db = new PDO('mysql:host=localhost;dbname=projetmusicbd;charset=utf8', 'root', 'root');
-$test = $db->prepare('SELECT * FROM prof');
-$test->execute();
-$lestest = $test->fetchAll();
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,8 +46,9 @@ $lestest = $test->fetchAll();
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="#top" class="active">Accueil</a></li>
-                            <li class="scroll-to-section"><a href="#men">Réservation</a></li>                        
+                            <li class="scroll-to-section"><a href="index.html" class="active">Accueil</a></li>
+                            <li class="scroll-to-section"><a href="reservation.php">Réservation</a></li>
+                            <li class="scroll-to-section"><a href="login.html">Connexion</a></li>                        
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
