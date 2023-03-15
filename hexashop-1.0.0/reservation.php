@@ -220,22 +220,32 @@
 
         var select1 = document.getElementById("select1");
         var select2 = document.getElementById("select2");
-
+        var xhttp = new XMLHttpRequest();
 
         select1.addEventListener("change", updateSelect2);
 
         function updateSelect2() {
             var nbrselect = select1.selectedIndex;
             var selectedOption = select1.options[nbrselect];
-
-            // Supprimer les options précédentes
-            // while (select2.firstChild) {
-            //     select2.removeChild(select2.firstChild);
-            // }
+            var variableInstru = selectedOption.value;
             
-            console.log(selectedOption.value);
+
+            console.log(variableInstru);
+            
+
+            xhttp.open("POST", "changeSelect.php", true);
+            xhttp.setRequestHeader("instrument", variableInstru);
+            xhttp.send();
+
 
         }
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+             }
+        };
+
     </script>
 
   </body>
