@@ -70,3 +70,11 @@ CREATE TABLE dispo(
    FOREIGN KEY(Id_Prof) REFERENCES prof(Id_Prof),
    FOREIGN KEY(Id_disponibilite) REFERENCES disponibilite(Id_disponibilite)
 );
+
+Inscertion de données :
+
+INSERT INTO `prof` (`Id_Prof`, `nom_P`, `prenom_P`, `description_P`) VALUES ('1', 'Thibro', 'Commun', 'Prof commun'), ('2', 'Andreas', 'Le rat', 'Un dev web de grand talent (surtout en Javascript)');
+
+INSERT INTO `utilisateur` (`Id_utilisateur`, `nom_U`, `adresse_U`, `mdp`) VALUES ('1', 'Gabriel', 'On finira par savoir', 'mdp'), ('2', 'Yoann', 'Paris', 'Une personne incroyable'), ('3', 'Philippe', 'Philippine', 'enculer');
+
+INSERT INTO `instrument` (`Id_instrument`, `nom_instru`, `famille`) VALUES ('1', 'violon', 'cordes'), ('2', 'guitare', 'cordes'), ('3', 'piano', 'cordes'), ('4', 'flûte', 'vent'), ('5', 'saxophone', 'vent'), ('6', 'trompette', 'vent'), ('7', 'batterie', 'Percussion');
