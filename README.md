@@ -46,7 +46,7 @@ CREATE TABLE cours(
    matin BOOLEAN NOT NULL,
    apres_midi BOOLEAN NOT NULL,
    _date DATETIME NOT NULL,
-   duree INT NOT NULL CHECK (duree = 1 ) OR (duree = 2),
+   duree INT NOT NULL CHECK (duree = 1 OR duree = 2),
    description_C VARCHAR(50) NOT NULL,
    Id_Prof INT NOT NULL,
    Id_utilisateur INT NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE cours(
    FOREIGN KEY(Id_utilisateur) REFERENCES utilisateur(Id_utilisateur)
 );
 
-CREATE TABLE POSSEDE(
+CREATE TABLE possede(
    Id_Prof INT ,
    Id_instrument INT,
    PRIMARY KEY(Id_Prof, Id_instrument),
@@ -63,7 +63,7 @@ CREATE TABLE POSSEDE(
    FOREIGN KEY(Id_instrument) REFERENCES instrument(Id_instrument)
 );
 
-CREATE TABLE DISPO(
+CREATE TABLE dispo(
    Id_Prof INT,
    Id_disponibilite INT,
    PRIMARY KEY(Id_Prof, Id_disponibilite),
