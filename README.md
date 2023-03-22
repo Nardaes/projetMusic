@@ -31,7 +31,7 @@ CREATE TABLE instrument(
    Id_instru INT AUTO_INCREMENT,
    nom_instru VARCHAR(50) NOT NULL,
    famille VARCHAR(50) NOT NULL,
-   PRIMARY KEY(Id_instrument)
+   PRIMARY KEY(Id_instru)
 );
 
 CREATE TABLE disponibilite(
