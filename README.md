@@ -109,4 +109,4 @@ INSERT INTO `cours` (`Id_cours`, `matin`, `apres_midi`, `_date`, `duree`, `descr
 (1, 1, 0, '2023-03-25 09:00:00', 2, 'Je veux apprendre le piano', 1, 3),
 (2, 0, 1, '2023-04-01 16:00:00', 2, 'Je suis une carpe', 2, 1); 
 
-INSERT INTO `possede` (`Id_prof`, `Id_instru`) VALUES ('2', '4'), ('2', '7'), ('1', '2'), ('2', '3'), ('1', '6'), ('2', '6'), ('1', '5');
+INSERT INTO `possede` (`Id_Prof`, `Id_instru`) VALUES ('1', '5'), ('2', '6'), ('3', '3'), ('4', '3'), ('5', '3'), ('6', '7'), ('7', '7'), ('8', '5'), ('8', '8'), ('8', '9'), ('9', '6'), ('9', '3'), ('10', '10'), ('11', '11');
