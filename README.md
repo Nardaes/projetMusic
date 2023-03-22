@@ -74,7 +74,18 @@ CREATE TABLE dispo(
 
 Inscertion de données :
 
-INSERT INTO `prof` (`Id_Prof`, `nom_P`, `prenom_P`, `description_P`) VALUES ('1', 'Thibro', 'Commun', 'Prof commun'), ('2', 'Andreas', 'Le rat', 'Un dev web de grand talent (surtout en Javascript)');
+INSERT INTO `prof` (`Id_Prof`, `nom_P`, `prenom_P`, `description_P`) VALUES
+(1, 'Charlie', 'Parker', 'Prof commun'),
+(2, 'Chet', 'Baker', 'Un dev web de grand talent (surtout en Javascript)'),
+(3, 'Keith', 'Jarret', 'Prof commun'),
+(4, 'Yaron', 'Herman ', 'Prof commun'),
+(5, 'Hiromi', 'Hueara ', 'Prof commun'),
+(6, 'Daniel', 'Humair ', 'Prof commun'),
+(7, 'Simon', 'Philips', 'Prof commun'),
+(8, 'Michel', 'Portal ', 'Prof commun'),
+(9, 'Ibrahim', 'Maalouf', 'Prof commun'),
+(10, 'Naïssam', 'Jalal', 'Prof commun'),
+(11, 'Vincent', 'Peirani', 'Prof commun');
 
 INSERT INTO `utilisateur` (`Id_utilisateur`, `nom_U`, `adresse_U`, `mdp_U`, `mail_U`) VALUES
 (1, 'Gabriel', 'On finira par savoir', 'mdp', 'gabriel@gmail.com'),
