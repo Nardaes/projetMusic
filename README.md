@@ -61,7 +61,7 @@ CREATE TABLE possede(
    Id_instrument INT,
    PRIMARY KEY(Id_Prof, Id_instrument),
    FOREIGN KEY(Id_Prof) REFERENCES prof(Id_Prof),
-   FOREIGN KEY(Id_instrument) REFERENCES instrument(Id_instrument)
+   FOREIGN KEY(Id_instru) REFERENCES instrument(Id_instru)
 );
 
 CREATE TABLE dispo(
@@ -81,10 +81,10 @@ INSERT INTO `utilisateur` (`Id_utilisateur`, `nom_U`, `adresse_U`, `mdp_U`, `mai
 (2, 'Yoann', 'Paris', 'Une personne incroyable', 'yoann@gmail.com'),
 (3, 'Philippe', 'Philippine', 'enculer', 'philippe@gmail.com');
 
-INSERT INTO `instrument` (`Id_instrument`, `nom_instru`, `famille`) VALUES ('1', 'violon', 'cordes'), ('2', 'guitare', 'cordes'), ('3', 'piano', 'cordes'), ('4', 'flûte', 'vent'), ('5', 'saxophone', 'vent'), ('6', 'trompette', 'vent'), ('7', 'batterie', 'Percussion');
+INSERT INTO `instrument` (`Id_instru`, `nom_instru`, `famille`) VALUES ('1', 'violon', 'cordes'), ('2', 'guitare', 'cordes'), ('3', 'piano', 'cordes'), ('4', 'flûte', 'vent'), ('5', 'saxophone', 'vent'), ('6', 'trompette', 'vent'), ('7', 'batterie', 'Percussion');
 
 INSERT INTO `cours` (`Id_cours`, `matin`, `apres_midi`, `_date`, `duree`, `description_C`, `Id_Prof`, `Id_utilisateur`) VALUES
 (1, 1, 0, '2023-03-25 09:00:00', 2, 'Je veux apprendre le piano', 1, 3),
 (2, 0, 1, '2023-04-01 16:00:00', 2, 'Je suis une carpe', 2, 1);
 
-INSERT INTO `possede` (`Id_Prof`, `Id_instrument`) VALUES ('2', '4'), ('2', '7'), ('1', '2'), ('2', '3'), ('1', '6'), ('2', '6'), ('1', '5');
+INSERT INTO `possede` (`Id_Prof`, `Id_instru`) VALUES ('2', '4'), ('2', '7'), ('1', '2'), ('2', '3'), ('1', '6'), ('2', '6'), ('1', '5');
