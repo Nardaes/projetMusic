@@ -22,7 +22,7 @@ CREATE TABLE utilisateur(
    Id_utilisateur INT AUTO_INCREMENT,
    nom_U VARCHAR(50) NOT NULL,
    adresse_U VARCHAR(50) NOT NULL,
-   mdp_U VARCHAR(50) NOT NULL,
+   mdp_U VARCHAR(255) NOT NULL,
    mail_U VARCHAR(50) NOT NULL,
    PRIMARY KEY(Id_utilisateur)
 );
