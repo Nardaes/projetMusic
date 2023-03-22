@@ -1,3 +1,21 @@
+<?php
+
+$host = 'localhost';
+$user = 'root';
+$password = 'root';
+$database = 'musique';
+
+//connexion à la base de données
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$database", $user, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo 'Connexion réussie !';
+} catch (PDOException $e) {
+    die('Erreur de connexion : ' . $e->getMessage());
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,7 +66,7 @@
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="index.html" class="active">Accueil</a></li>
                             <li class="scroll-to-section"><a href="reservation.php">Réservation</a></li>
-                            <li class="scroll-to-section"><a href="login.html">Connexion</a></li>                        
+                            <li class="scroll-to-section"><a href="login.php">Connexion</a></li>                        
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>

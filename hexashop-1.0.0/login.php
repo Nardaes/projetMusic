@@ -1,3 +1,48 @@
+<?php
+$host = 'localhost';
+$user = 'root';
+$password = 'root';
+$database = 'musique';
+
+//connexion à la base de données
+
+$pdo = new PDO("mysql:host=$host;dbname=$database", $user, $password);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$request_method = strtoupper($_SERVER['REQUEST_METHOD']);
+
+if ($request_method === 'POST') {
+	if (isset($_POST['envoyer'])) {
+        if(isset($_POST["exampleInputEmail1"]) && isset($_POST['exampleInputPassword1'])){
+            $login=$_POST["exampleInputEmail1"];
+            $password = $_POST['exampleInputPassword1'];
+    
+            $stmt = $pdo->prepare('SELECT * FROM utilisateur WHERE mail_U = :email');
+            $stmt->bindParam(':email', $login);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                // Vérifier si le mot de passe est correct
+            // if (password_verify($password, $user['password'])) {
+            //     // Connexion réussie, stocker les informations de l'utilisateur dans la session
+            //     session_start();
+            //     $_SESSION['user_id'] = $user['id'];
+            //     $_SESSION['user_email'] = $user['email'];
+            //     $_SESSION['user_nom'] = $user['nom'];
+
+            //     // Rediriger vers la page d'accueil
+            //     header('Location: index.php');
+            //     exit;
+            // } else {
+            //     // Identifiants de connexion invalides, afficher un message d'erreur
+            //     $message = 'Adresse e-mail ou mot de passe incorrect.';
+            // }
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,25 +112,28 @@
             <div class="row">
                 <div class="card" style=" margin: 0 auto; float: none; margin-bottom: 10px;">
                     <div class="card-body">
-                        <form>
+                        <form method="post">
                             <div class="form-group">
                             <label for="exampleInputEmail1">Adresse Mail</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Adresse Mail">
+                            <input type="email" class="form-control" id="exampleInputEmail1" name="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Adresse Mail">
                             <small id="emailHelp" class="form-text text-muted">Nous partagerons jamais votre adresse mail avec quelqu'un.</small>
                             </div>
                             <div class="form-group">
                             <label for="exampleInputPassword1">Mot de passe</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="exampleInputPassword1" placeholder="Mot de passe">
                             </div>
                             <div class="form-group form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Se rappeler de moi</label>
                             </div>
-                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                            <button type="submit" name="envoyer" class="btn btn-primary">Envoyer</button>
                             <div class="form-group">
                                 <div class="mt-2">
-                                    <label >Pas inscrit ?</label><a href=""> Par ici</a>
+                                    <label >Pas inscrit ?</label><a href="register.php"> Par ici</a>
                                 </div>
+                                <?php if (isset($message)) : ?>
+                                    <div><?= $message ?></div>
+                                <?php endif ?>
                             </div>
 
                         </form>
