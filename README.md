@@ -58,8 +58,8 @@ CREATE TABLE cours(
 
 CREATE TABLE possede(
    Id_Prof INT ,
-   Id_instrument INT,
-   PRIMARY KEY(Id_Prof, Id_instrument),
+   Id_instru INT,
+   PRIMARY KEY(Id_Prof, Id_instru),
    FOREIGN KEY(Id_Prof) REFERENCES prof(Id_Prof),
    FOREIGN KEY(Id_instru) REFERENCES instrument(Id_instru)
 );
