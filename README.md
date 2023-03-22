@@ -11,11 +11,11 @@ Création d'un site de réservation de cours de music
   
 ## Premier SQL
 CREATE TABLE prof(
-   Id_Prof INT AUTO_INCREMENT,
+   Id_prof INT AUTO_INCREMENT,
    nom_P VARCHAR(50) NOT NULL,
    prenom_P VARCHAR(50) NOT NULL,
    description_P VARCHAR(50) NOT NULL,
-   PRIMARY KEY(Id_Prof)
+   PRIMARY KEY(Id_prof)
 );
 
 CREATE TABLE utilisateur(
@@ -49,32 +49,32 @@ CREATE TABLE cours(
    _date DATETIME NOT NULL,
    duree INT NOT NULL CHECK (duree = 1 OR duree = 2),
    description_C VARCHAR(50) NOT NULL,
-   Id_Prof INT NOT NULL,
+   Id_prof INT NOT NULL,
    Id_utilisateur INT NOT NULL,
    PRIMARY KEY(Id_cours),
-   FOREIGN KEY(Id_Prof) REFERENCES prof(Id_Prof),
+   FOREIGN KEY(Id_prof) REFERENCES prof(Id_prof),
    FOREIGN KEY(Id_utilisateur) REFERENCES utilisateur(Id_utilisateur)
 );
 
 CREATE TABLE possede(
-   Id_Prof INT ,
+   Id_prof INT ,
    Id_instru INT,
-   PRIMARY KEY(Id_Prof, Id_instru),
-   FOREIGN KEY(Id_Prof) REFERENCES prof(Id_Prof),
+   PRIMARY KEY(Id_prof, Id_instru),
+   FOREIGN KEY(Id_prof) REFERENCES prof(Id_prof),
    FOREIGN KEY(Id_instru) REFERENCES instrument(Id_instru)
 );
 
 CREATE TABLE dispo(
-   Id_Prof INT,
+   Id_prof INT,
    Id_disponibilite INT,
-   PRIMARY KEY(Id_Prof, Id_disponibilite),
-   FOREIGN KEY(Id_Prof) REFERENCES prof(Id_Prof),
+   PRIMARY KEY(Id_prof, Id_disponibilite),
+   FOREIGN KEY(Id_prof) REFERENCES prof(Id_prof),
    FOREIGN KEY(Id_disponibilite) REFERENCES disponibilite(Id_disponibilite)
 );
 
 Inscertion de données :
 
-INSERT INTO `prof` (`Id_Prof`, `nom_P`, `prenom_P`, `description_P`) VALUES
+INSERT INTO `prof` (`Id_prof`, `nom_P`, `prenom_P`, `description_P`) VALUES
 (1, 'Charlie', 'Parker', 'Prof commun'),
 (2, 'Chet', 'Baker', 'Un dev web de grand talent (surtout en Javascript)'),
 (3, 'Keith', 'Jarret', 'Prof commun'),
@@ -94,8 +94,8 @@ INSERT INTO `utilisateur` (`Id_utilisateur`, `nom_U`, `adresse_U`, `mdp_U`, `mai
 
 INSERT INTO `instrument` (`Id_instru`, `nom_instru`, `famille`) VALUES ('1', 'violon', 'cordes'), ('2', 'guitare', 'cordes'), ('3', 'piano', 'cordes'), ('4', 'flûte', 'vent'), ('5', 'saxophone', 'vent'), ('6', 'trompette', 'vent'), ('7', 'batterie', 'Percussion');
 
-INSERT INTO `cours` (`Id_cours`, `matin`, `apres_midi`, `_date`, `duree`, `description_C`, `Id_Prof`, `Id_utilisateur`) VALUES
+INSERT INTO `cours` (`Id_cours`, `matin`, `apres_midi`, `_date`, `duree`, `description_C`, `Id_prof`, `Id_utilisateur`) VALUES
 (1, 1, 0, '2023-03-25 09:00:00', 2, 'Je veux apprendre le piano', 1, 3),
 (2, 0, 1, '2023-04-01 16:00:00', 2, 'Je suis une carpe', 2, 1); 
 
-INSERT INTO `possede` (`Id_Prof`, `Id_instru`) VALUES ('2', '4'), ('2', '7'), ('1', '2'), ('2', '3'), ('1', '6'), ('2', '6'), ('1', '5');
+INSERT INTO `possede` (`Id_prof`, `Id_instru`) VALUES ('2', '4'), ('2', '7'), ('1', '2'), ('2', '3'), ('1', '6'), ('2', '6'), ('1', '5');
