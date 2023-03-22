@@ -23,7 +23,7 @@ CREATE TABLE utilisateur(
    nom_U VARCHAR(50) NOT NULL,
    adresse_U VARCHAR(50) NOT NULL,
    mdp_U VARCHAR(50) NOT NULL,
-   mail_U VARCHAR(70) NOT NULL,
+   mail_U VARCHAR(50) NOT NULL,
    PRIMARY KEY(Id_utilisateur)
 );
 
