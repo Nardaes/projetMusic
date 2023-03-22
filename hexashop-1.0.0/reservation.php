@@ -80,7 +80,7 @@
                             $lesinstruments = $instruments->fetchAll();
                     
                             foreach ($lesinstruments as $instru){
-                                echo "<option value=". $instru["NOM_INSTRU"] . ">" . $instru["NOM_INSTRU"] ."</option>";
+                                echo "<option value=". $instru["Id_instru"] . ">" . $instru["nom_instru"] ."</option>";
                             }
                             
                             
@@ -233,8 +233,7 @@
             console.log(variableInstru);
             
 
-            xhttp.open("POST", "changeSelect.php", true);
-            xhttp.setRequestHeader("instrument", variableInstru);
+            xhttp.open("GET", "changeSelect.php?instrument="+variableInstru, true);
             xhttp.send();
 
 
@@ -243,6 +242,8 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
+                var lesProfs = JSON.parse(this.responseText)
+                console.log(lesProfs.message[0].nom_P);
              }
         };
 
