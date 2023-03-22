@@ -92,7 +92,18 @@ INSERT INTO `utilisateur` (`Id_utilisateur`, `nom_U`, `adresse_U`, `mdp_U`, `mai
 (2, 'Yoann', 'Paris', 'Une personne incroyable', 'yoann@gmail.com'),
 (3, 'Philippe', 'Philippine', 'enculer', 'philippe@gmail.com');
 
-INSERT INTO `instrument` (`Id_instru`, `nom_instru`, `famille`) VALUES ('1', 'violon', 'cordes'), ('2', 'guitare', 'cordes'), ('3', 'piano', 'cordes'), ('4', 'flûte', 'vent'), ('5', 'saxophone', 'vent'), ('6', 'trompette', 'vent'), ('7', 'batterie', 'Percussion');
+INSERT INTO `instrument` (`Id_instru`, `nom_instru`, `famille`) VALUES
+(1, 'violon', 'cordes'),
+(2, 'guitare', 'cordes'),
+(3, 'piano', 'cordes'),
+(4, 'flûte', 'vent'),
+(5, 'saxophone', 'vent'),
+(6, 'trompette', 'vent'),
+(7, 'batterie', 'Percussion'),
+(8, 'Clarinette', 'vent'),
+(9, 'Bandonéon', 'vent'),
+(10, 'Flûte traversière', 'vent'),
+(11, 'Accordéon', 'vent');
 
 INSERT INTO `cours` (`Id_cours`, `matin`, `apres_midi`, `_date`, `duree`, `description_C`, `Id_prof`, `Id_utilisateur`) VALUES
 (1, 1, 0, '2023-03-25 09:00:00', 2, 'Je veux apprendre le piano', 1, 3),
