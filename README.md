@@ -28,7 +28,7 @@ CREATE TABLE utilisateur(
 );
 
 CREATE TABLE instrument(
-   Id_instrument INT AUTO_INCREMENT,
+   Id_instru INT AUTO_INCREMENT,
    nom_instru VARCHAR(50) NOT NULL,
    famille VARCHAR(50) NOT NULL,
    PRIMARY KEY(Id_instrument)
