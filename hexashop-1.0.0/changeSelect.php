@@ -1,6 +1,14 @@
 <?php
-$db = new PDO('mysql:host=localhost;dbname=projetmusicbd;charset=utf8', 'root', 'root');
-// Recevoir les données envoyées via une requête POST
+
+try{
+    $db = new PDO('mysql:host=10.31.176.99;dbname=musique;charset=utf8', 'jojo', 'dio'); 
+ }
+ catch(Exception $e){
+     var_dump($e->__toString());
+     exit;
+ }
+
+
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     $instru = $_GET["instrument"];
@@ -8,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     
     
     if($instru == null){
-        $message = "c'est null";
+        $message = "";
     }
     else{
         $lesProfs = $db->prepare('SELECT pr.* FROM prof pr INNER JOIN possede po on po.Id_Prof = pr.Id_Prof WHERE Id_instru = :instru');

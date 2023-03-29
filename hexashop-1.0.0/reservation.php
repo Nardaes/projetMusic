@@ -1,6 +1,13 @@
 <?php 
-    $db = new PDO('mysql:host=localhost;dbname=projetmusicbd;charset=utf8', 'root', 'root');
-    // $db = new PDO('mysql:host=10.31.184.99;dbname=musique;charset=utf8', 'jojo', 'dio');
+    // $db = new PDO('mysql:host=localhost;dbname=projetmusicbd;charset=utf8', 'root', 'root');
+    try{
+       $db = new PDO('mysql:host=10.31.176.99;dbname=musique;charset=utf8', 'jojo', 'dio'); 
+    }
+    catch(Exception $e){
+        var_dump($e->__toString());
+        exit;
+    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,20 +97,20 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>Professeur :</label>
-                    <select id="select2" class="form-control">
-
+                    <label id="label2" style="display : none">Professeur :</label>
+                    <select id="select2" class="form-control" style="display : none">
+                        
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Date :</label>
-                    <input type="date" class="form-control">
+                    <label style="display : none">Date :</label>
+                    <input style="display : none" type="date" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Horraire :</label>
-                    <input type="time" class="form-control">
+                    <label style="display : none">Horaire :</label>
+                    <input style="display : none" type="time" class="form-control">
                 </div>
-                <button type="submit" class="btn btn-primary">Reserver</button>
+                <button style="display : none" type="submit" class="btn btn-primary">Reserver</button>
             </form>
         </div>
     </div>
@@ -217,35 +224,73 @@
 
 
     <script>
-
         var select1 = document.getElementById("select1");
         var select2 = document.getElementById("select2");
-        var xhttp = new XMLHttpRequest();
+        var label2 = document.getElementById("label2");
+        var xhttpProf = new XMLHttpRequest();
 
-        select1.addEventListener("change", updateSelect2);
 
-        function updateSelect2() {
+        // ecouter le select des instrument et envoyer la requete XML
+        select1.addEventListener("change", detecteSelect1);
+        function detecteSelect1() {
             var nbrselect = select1.selectedIndex;
             var selectedOption = select1.options[nbrselect];
             var variableInstru = selectedOption.value;
             
 
-            console.log(variableInstru);
-            
-
-            xhttp.open("GET", "changeSelect.php?instrument="+variableInstru, true);
-            xhttp.send();
+            xhttpProf.open("GET", "changeSelect.php?instrument="+variableInstru, true);
+            xhttpProf.send();
 
 
         }
 
-        xhttp.onreadystatechange = function() {
+        // recuperé la requete XML 
+        xhttpProf.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
                 var lesProfs = JSON.parse(this.responseText)
-                console.log(lesProfs.message[0].nom_P);
+
+                if(lesProfs.message[0] != null){
+                    console.log("ya au moins un prof");
+
+                    changeSelect2(lesProfs.message);
+                }
+                else{
+                    select2.style.display = "none";
+                    label2.style.display = "none";
+                }
              }
         };
+
+
+        // faire le select des profs
+        function changeSelect2(allProf){
+
+            //efacer les ancien prof
+            var lesOptions = select2.getElementsByTagName('option');
+            for (var i=lesOptions.length; i--;) {
+                select2.removeChild(lesOptions[i]);
+            }
+
+            //mettre l'option 0 et faire aparaitre
+            var theOption1 = document.createElement('option');
+            theOption1.value = "";
+            theOption1.textContent = "Choisir in professeur";
+            select2.appendChild(theOption1);
+
+            select2.style.display = "block";
+            label2.style.display = "block";
+
+            // mettre tout les prof en option
+            for(var i=0; i<allProf.length; i++){
+                console.log(allProf[i][1], allProf[i][2] ,allProf[i][0]);
+                var theOption = document.createElement('option');
+                theOption.value = allProf[i][0];
+                theOption.textContent = allProf[i][1]+" "+allProf[i][2];
+                select2.appendChild(theOption);
+            }
+            
+        }
 
     </script>
 
