@@ -1,7 +1,8 @@
 <?php 
-    // $db = new PDO('mysql:host=localhost;dbname=projetmusicbd;charset=utf8', 'root', 'root');
+    
     try{
-       $db = new PDO('mysql:host=10.31.176.99;dbname=musique;charset=utf8', 'jojo', 'dio'); 
+        // $db = new PDO('mysql:host=localhost;dbname=projetmusicbd;charset=utf8', 'root', 'root');
+        $db = new PDO('mysql:host=10.31.176.99;dbname=musique;charset=utf8', 'jojo', 'dio'); 
     }
     catch(Exception $e){
         var_dump($e->__toString());
@@ -102,12 +103,17 @@
                         
                     </select>
                 </div>
+
+
+
                 <div class="form-group">
-                    <label style="display : none">Date :</label>
-                    <input style="display : none" type="date" class="form-control">
+                    <label id="label3" style="display : none">Date :</label>
+                    <input id="select3" style="display : none" type="date" class="form-control">
                 </div>
+
+
                 <div class="form-group">
-                    <label style="display : none">Horaire :</label>
+                    <label  style="display : none">Horaire :</label>
                     <input style="display : none" type="time" class="form-control">
                 </div>
                 <button style="display : none" type="submit" class="btn btn-primary">Reserver</button>
@@ -120,66 +126,7 @@
 
     
     
-    <!-- ***** Footer Start ***** -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="first-item">
-                        <div class="logo">
-                            <img src="assets/images/white-logo.png" alt="hexashop ecommerce templatemo">
-                        </div>
-                        <ul>
-                            <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
-                            <li><a href="#">hexashop@company.com</a></li>
-                            <li><a href="#">010-020-0340</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <h4>Shopping &amp; Categories</h4>
-                    <ul>
-                        <li><a href="#">Men’s Shopping</a></li>
-                        <li><a href="#">Women’s Shopping</a></li>
-                        <li><a href="#">Kid's Shopping</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3">
-                    <h4>Useful Links</h4>
-                    <ul>
-                        <li><a href="#">Homepage</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Help</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3">
-                    <h4>Help &amp; Information</h4>
-                    <ul>
-                        <li><a href="#">Help</a></li>
-                        <li><a href="#">FAQ's</a></li>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Tracking ID</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-12">
-                    <div class="under-footer">
-                        <p>Copyright © 2022 HexaShop Co., Ltd. All Rights Reserved. 
-                        
-                        <br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a>
-
-                        <br>Distributed By: <a href="https://themewagon.com" target="_blank" title="free & premium responsive templates">ThemeWagon</a></p>
-                        <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    
     
 
     <!-- jQuery -->
@@ -226,8 +173,52 @@
     <script>
         var select1 = document.getElementById("select1");
         var select2 = document.getElementById("select2");
+        var select3 = document.getElementById("select3");
         var label2 = document.getElementById("label2");
+        var label3 = document.getElementById("label3");
         var xhttpProf = new XMLHttpRequest();
+        var WhereInTheForm = "";
+
+        // recuperé les requete XML 
+        xhttpProf.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+                
+
+                var Lemessage = JSON.parse(this.responseText)
+
+                console.log(Lemessage);
+
+                if(WhereInTheForm == "inprof"){
+                    if(Lemessage.message[0] != null){
+                        console.log("ya au moins un prof");
+
+                        changeSelect2(Lemessage.message);
+                    }
+                    else{
+                        select2.style.display = "none";
+                        label2.style.display = "none";
+                        select3.style.display = "none";
+                        label3.style.display = "none";
+                    }
+                }
+
+                if(WhereInTheForm == "indate"){
+                    if(Lemessage.message[0] != null){
+                        console.log("ya au moins une date");
+
+                        changeSelect3(Lemessage.message);
+                    }
+                    else{
+                        select3.style.display = "none";
+                        label3.style.display = "none";
+                    }
+                }
+
+
+             }
+        };
+
 
 
         // ecouter le select des instrument et envoyer la requete XML
@@ -237,30 +228,13 @@
             var selectedOption = select1.options[nbrselect];
             var variableInstru = selectedOption.value;
             
+            WhereInTheForm ="inprof";
 
             xhttpProf.open("GET", "changeSelect.php?instrument="+variableInstru, true);
             xhttpProf.send();
-
-
         }
 
-        // recuperé la requete XML 
-        xhttpProf.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
-                var lesProfs = JSON.parse(this.responseText)
-
-                if(lesProfs.message[0] != null){
-                    console.log("ya au moins un prof");
-
-                    changeSelect2(lesProfs.message);
-                }
-                else{
-                    select2.style.display = "none";
-                    label2.style.display = "none";
-                }
-             }
-        };
+        
 
 
         // faire le select des profs
@@ -291,6 +265,58 @@
             }
             
         }
+
+
+
+        select2.addEventListener("change", detecteSelect2);
+        function detecteSelect2() {
+            var nbrselect = select2.selectedIndex;
+            var selectedOption = select2.options[nbrselect];
+            var variableProf = selectedOption.value;
+            
+            console.log(variableProf);
+
+            WhereInTheForm ="indate";
+
+            xhttpProf.open("GET", "changeSelect.php?prof="+variableProf, true);
+            xhttpProf.send();
+        }
+
+
+
+
+        function changeSelect3(allDate){
+
+
+            var today = new Date().toISOString().split('T')[0];
+            select3.setAttribute('min', today);
+
+
+
+
+            // Récupération des éléments du calendrier et des jours disponibles
+            
+            // var availableDays = ['lundi', 'mercredi'];
+
+            // // Désactivation des dates qui ne correspondent pas aux jours disponibles
+            // $(select3).find('.datepicker td').not('.disabled').each(function() {
+            //     var date = new Date($(this).data('date'));
+            //     var day = date.toLocaleDateString('fr-FR', { weekday: 'long' });
+            //     if (availableDays.indexOf(day) === -1) {
+            //         $(this).addClass('disabled');
+            //     }
+            // });
+
+
+            select3.style.display = "block";
+            label3.style.display = "block";
+
+            
+
+        }
+
+
+
 
     </script>
 
