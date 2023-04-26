@@ -104,7 +104,7 @@ INSERT INTO `cours` (`Id_cours`, `matin`, `apres_midi`, `_date`, `duree`, `descr
 
 INSERT INTO `possede` (`Id_Prof`, `Id_instru`) VALUES ('1', '5'), ('2', '6'), ('3', '3'), ('4', '3'), ('5', '3'), ('6', '7'), ('7', '7'), ('8', '5'), ('8', '8'), ('8', '9'), ('9', '6'), ('9', '3'), ('10', '10'), ('11', '11');
 
-INSERT INTO `disponibilite` (`Id_disponibilite`, `jour`, `matin`, `apres_midi`, `Id_utilisateur`) VALUES
+INSERT INTO `disponibilite` (`Id_disponibilite`, `jour`, `matin`, `apres_midi`, `Id_prof `) VALUES
 (1, 'mardi', true, false, 1),
 (2, 'vendredi', false, true, 1),
 (3, 'jeudi', true, false, 2),
