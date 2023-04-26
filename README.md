@@ -110,3 +110,7 @@ INSERT INTO `cours` (`Id_cours`, `matin`, `apres_midi`, `_date`, `duree`, `descr
 (2, 0, 1, '2023-04-01 16:00:00', 2, 'Je suis une carpe', 2, 1); 
 
 INSERT INTO `possede` (`Id_Prof`, `Id_instru`) VALUES ('1', '5'), ('2', '6'), ('3', '3'), ('4', '3'), ('5', '3'), ('6', '7'), ('7', '7'), ('8', '5'), ('8', '8'), ('8', '9'), ('9', '6'), ('9', '3'), ('10', '10'), ('11', '11');
+
+INSERT INTO `disponibilite` (`Id_disponibilite`, `jour`, `matin`, `apres_midi`, `Id_disponibilite`) VALUES
+(1, 'lundi', true, true, 1),
+(2, 'mardi', true, true, 1); 
