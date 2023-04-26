@@ -39,7 +39,8 @@ CREATE TABLE disponibilite(
    jour VARCHAR(50) NOT NULL,
    matin BOOLEAN NOT NULL,
    apres_midi BOOLEAN NOT NULL,
-   PRIMARY KEY(Id_disponibilite)
+   PRIMARY KEY(Id_disponibilite),
+   FOREIGN KEY(Id_prof) REFERENCES prof(Id_prof)
 );
 
 CREATE TABLE cours(
@@ -62,14 +63,6 @@ CREATE TABLE possede(
    PRIMARY KEY(Id_prof, Id_instru),
    FOREIGN KEY(Id_prof) REFERENCES prof(Id_prof),
    FOREIGN KEY(Id_instru) REFERENCES instrument(Id_instru)
-);
-
-CREATE TABLE dispo(
-   Id_prof INT,
-   Id_disponibilite INT,
-   PRIMARY KEY(Id_prof, Id_disponibilite),
-   FOREIGN KEY(Id_prof) REFERENCES prof(Id_prof),
-   FOREIGN KEY(Id_disponibilite) REFERENCES disponibilite(Id_disponibilite)
 );
 
 Inscertion de données :
@@ -111,7 +104,7 @@ INSERT INTO `cours` (`Id_cours`, `matin`, `apres_midi`, `_date`, `duree`, `descr
 
 INSERT INTO `possede` (`Id_Prof`, `Id_instru`) VALUES ('1', '5'), ('2', '6'), ('3', '3'), ('4', '3'), ('5', '3'), ('6', '7'), ('7', '7'), ('8', '5'), ('8', '8'), ('8', '9'), ('9', '6'), ('9', '3'), ('10', '10'), ('11', '11');
 
-INSERT INTO `disponibilite` (`Id_disponibilite`, `jour`, `matin`, `apres_midi`, `Id_disponibilite`) VALUES
+INSERT INTO `disponibilite` (`Id_disponibilite`, `jour`, `matin`, `apres_midi`, `Id_utilisateur`) VALUES
 (1, 'mardi', true, false, 1),
 (2, 'vendredi', false, true, 1),
 (3, 'jeudi', true, false, 2),
@@ -126,4 +119,4 @@ INSERT INTO `disponibilite` (`Id_disponibilite`, `jour`, `matin`, `apres_midi`, 
 (12, 'jeudi', false, true, 9),
 (13, 'mardi', true, false, 10),
 (14, 'samedi', true, true, 11),
-(15, 'mercredi', true, false, 11)
+(15, 'mercredi', true, false, 11);
