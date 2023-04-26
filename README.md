@@ -126,4 +126,4 @@ INSERT INTO `disponibilite` (`Id_disponibilite`, `jour`, `matin`, `apres_midi`, 
 (12, 'jeudi', false, true, 9),
 (13, 'mardi', true, false, 10),
 (14, 'samedi', true, true, 11),
-(15, 'mercredi', true, false, 11),
+(15, 'mercredi', true, false, 11)
