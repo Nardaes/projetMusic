@@ -9,6 +9,10 @@ Création d'un site de réservation de cours de music
 
   ![image](https://user-images.githubusercontent.com/82157014/206128912-7b1f4d49-dd7c-4b6a-b516-af567dae6ec8.png)
   
+## Deuxième MCD :
+
+  ![image](https://user-images.githubusercontent.com/113110274/234507928-00616f8b-fe9d-44a4-a6fa-171ac5dd1f06.png)
+  
 ## Premier SQL
 CREATE TABLE prof(
    Id_prof INT AUTO_INCREMENT,
