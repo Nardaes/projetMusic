@@ -112,5 +112,18 @@ INSERT INTO `cours` (`Id_cours`, `matin`, `apres_midi`, `_date`, `duree`, `descr
 INSERT INTO `possede` (`Id_Prof`, `Id_instru`) VALUES ('1', '5'), ('2', '6'), ('3', '3'), ('4', '3'), ('5', '3'), ('6', '7'), ('7', '7'), ('8', '5'), ('8', '8'), ('8', '9'), ('9', '6'), ('9', '3'), ('10', '10'), ('11', '11');
 
 INSERT INTO `disponibilite` (`Id_disponibilite`, `jour`, `matin`, `apres_midi`, `Id_disponibilite`) VALUES
-(1, 'lundi', true, true, 1),
-(2, 'mardi', true, true, 1); 
+(1, 'mardi', true, false, 1),
+(2, 'vendredi', false, true, 1),
+(3, 'jeudi', true, false, 2),
+(4, 'vendredi', true, true, 3),
+(5, 'lundi', true, false, 4),
+(6, 'mardi', false, true, 5),
+(7, 'samedi', true, true, 6),
+(8, 'mercredi', true, true, 7),
+(9, 'jeudi', true, false, 8),
+(10, 'samedi', true, false, 8),
+(11, 'lundi', false, true, 9),
+(12, 'jeudi', false, true, 9),
+(13, 'mardi', true, false, 10),
+(14, 'samedi', true, true, 11),
+(15, 'mercredi', true, false, 11),
