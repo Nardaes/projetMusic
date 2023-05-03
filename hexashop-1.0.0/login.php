@@ -24,9 +24,7 @@ if ($request_method === 'POST') {
 
             if (password_verify($password, $user['mdp_U'])) {
                 
-                session_start([
-                    'cookie_lifetime' => 86400,
-                ]);
+                session_start();
 
                 $_SESSION['connected'] = TRUE;
                 $_SESSION['user_id'] = $user['Id_utilisateur'];
@@ -43,6 +41,14 @@ if ($request_method === 'POST') {
             }
         }
     }
+}
+
+if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+    // Effectuer les opérations de déconnexion
+    session_destroy();
+    // Rediriger vers une autre page après la déconnexion
+    header('Location: index.php');
+    exit;
 }
 
 ?>

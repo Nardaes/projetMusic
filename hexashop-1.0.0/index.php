@@ -12,14 +12,22 @@ $user = 'root';
 $password = 'root';
 $database = 'musique';
 
+session_start();
+
 //connexion à la base de données
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$database", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    session_start();
-    // var_dump($_SESSION);
 } catch (PDOException $e) {
     die('Erreur de connexion : ' . $e->getMessage());
+}
+
+if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+    // Effectuer les opérations de déconnexion
+    session_destroy();
+    // Rediriger vers une autre page après la déconnexion
+    header('Location: index.php');
+    exit;
 }
 
 ?>
@@ -75,14 +83,11 @@ try {
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="index.php" class="active">Accueil</a></li>
                             <li class="scroll-to-section"><a href="reservation.php">Réservation</a></li>
-                            <?php if(isset($_SESSION['connected'])){if($_SESSION['connected'] == TRUE){
-                                session_destroy();
-                            ?>
-                            <li class="scroll-to-section"><a href="index.php">Déconnexion</a></li>  
-                            <?php }} else{
-                            ?> 
-                            <li class="scroll-to-section"><a href="login.php">Connexion</a></li>  
-                            <?php } ?>
+                            <?php if (isset($_SESSION['connected']) && $_SESSION['connected'] === true): ?>
+                                <li class="scroll-to-section"><a href="index.php?action=logout">Déconnexion</a></li>
+                            <?php else: ?>
+                                <li class="scroll-to-section"><a href="login.php">Connexion</a></li>
+                            <?php endif; ?>
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>

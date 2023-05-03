@@ -1,17 +1,23 @@
 <?php 
-
+    session_start();
     try{
-        // $db = new PDO('mysql:host=localhost;dbname=projetmusicbd;charset=utf8', 'root', 'root');
-        $db = new PDO('mysql:host=10.31.176.99;dbname=musique;charset=utf8', 'jojo', 'dio');
-        session_start();
-        if(isset($_SESSION['connected'])){if($_SESSION['connected'] == FALSE){
+        $db = new PDO('mysql:host=localhost;dbname=musique;charset=utf8', 'root', 'root');
+        // $db = new PDO('mysql:host=10.31.176.99;dbname=musique;charset=utf8', 'jojo', 'dio');
+        if (!isset($_SESSION['connected']) || $_SESSION['connected'] == false) {
             header('Location: index.php');
-            }
+            exit; // Assurez-vous d'arrêter l'exécution du script après la redirection
         }
-        // var_dump($_SESSION);
     }
     catch(Exception $e){
         var_dump($e->__toString());
+        exit;
+    }
+
+    if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+        // Effectuer les opérations de déconnexion
+        session_destroy();
+        // Rediriger vers une autre page après la déconnexion
+        header('Location: index.php');
         exit;
     }
     
@@ -67,14 +73,11 @@
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="index.php" class="active">Accueil</a></li>
                             <li class="scroll-to-section"><a href="reservation.php">Réservation</a></li>
-                            <?php if(isset($_SESSION['connected'])){if($_SESSION['connected'] == TRUE){
-                                session_destroy();
-                            ?>
-                            <li class="scroll-to-section"><a href="index.php">Déconnexion</a></li>  
-                            <?php }} else{
-                            ?> 
-                            <li class="scroll-to-section"><a href="login.php">Connexion</a></li>  
-                            <?php } ?>                      
+                            <?php if (isset($_SESSION['connected']) && $_SESSION['connected'] === true): ?>
+                                <li class="scroll-to-section"><a href="index.php?action=logout">Déconnexion</a></li>
+                            <?php else: ?>
+                                <li class="scroll-to-section"><a href="login.php">Connexion</a></li>
+                            <?php endif; ?>                  
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>

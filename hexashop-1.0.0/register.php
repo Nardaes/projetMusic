@@ -5,49 +5,39 @@ $user = 'root';
 $password = 'root';
 $database = 'musique';
 
-//connexion à la base de données
-
+// Connexion à la base de données
 $pdo = new PDO("mysql:host=$host;dbname=$database", $user, $password);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
 $request_method = strtoupper($_SERVER['REQUEST_METHOD']);
-// print($request_method);
 
-if ($request_method === 'POST'){
-    if (isset($_POST['envoyer'])){
-        // $stmt = $pdo->prepare('INSERT INTO utilisateur (nom_U, adresse_U, mdp_U, mail_U) VALUES (:nom, :adresse, :password, :email)');
-            try {
-            $nom = $_POST['exampleInputNom1'];
-            $email = $_POST['exampleInputEmail1']; 
-            $adresse = $_POST['exampleInputAdressePostal1'];
-            $password = password_hash($_POST['exampleInputPassword1'], PASSWORD_DEFAULT);
+if ($request_method === 'POST') {
+    if (isset($_POST['envoyer'])) {
+        $nom = $_POST['exampleInputNom1'];
+        $email = $_POST['exampleInputEmail1']; 
+        $adresse = $_POST['exampleInputAdressePostal1'];
+        $password = password_hash($_POST['exampleInputPassword1'], PASSWORD_DEFAULT);
 
-            $stmt = $pdo->prepare('INSERT INTO utilisateur (nom_U, adresse_U, mdp_U, mail_U) VALUES (:nom, :adresse, :password, :email)');
-            $stmt->bindParam(':nom', $nom);
-            $stmt->bindParam(':adresse', $adresse);
-            $stmt->bindParam(':password', $password);
-            $stmt->bindParam(':email', $email);
-            $stmt->execute();
+        $stmt = $pdo->prepare('INSERT INTO utilisateur (nom_U, adresse_U, mdp_U, mail_U) VALUES (:nom, :adresse, :password, :email)');
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':adresse', $adresse);
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
 
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            var_dump($result);
+        session_start([
+            'cookie_lifetime' => 86400,
+        ]);
+        $_SESSION['connected'] = true;
+        $_SESSION['user_id'] = $pdo->lastInsertId();
+        $_SESSION['user_email'] = $email;
+        $_SESSION['user_nom'] = $nom;
 
-            session_start([
-                'cookie_lifetime' => 86400,
-            ]);
-            $_SESSION['connected'] = TRUE;
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_email'] = email;
-            $_SESSION['user_nom'] = $nom;
-
-
-            header('Location: index.php');
-            } catch (PDOException $e) {
-                echo 'Erreur : ' . $e->getMessage();
-            }
+        header('Location: index.php');
+        exit;
     }
 }
+
 ?>
 
 <!DOCTYPE html>
