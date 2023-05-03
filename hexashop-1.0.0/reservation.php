@@ -2,7 +2,7 @@
     
     try{
         // $db = new PDO('mysql:host=localhost;dbname=projetmusicbd;charset=utf8', 'root', 'root');
-        $db = new PDO('mysql:host=10.31.176.99;dbname=musique;charset=utf8', 'jojo', 'dio'); 
+        $db = new PDO('mysql:host=10.31.176.99;dbname=musique;charset=utf8', 'jojo', 'dio');
     }
     catch(Exception $e){
         var_dump($e->__toString());
@@ -111,11 +111,15 @@
                     <input id="select3" style="display : none" type="date" class="form-control">
                 </div>
 
-
+                
                 <div class="form-group">
-                    <label  style="display : none">Horaire :</label>
-                    <input style="display : none" type="time" class="form-control">
+                    <label  id="label4" style="display : none">Horaire :</label>
+                    <p id="label41" style="display : none">Il n'y a pas d'horraire ce jour là</p>
+                    <input id="select4" style="display : none" type="time" class="form-control">
                 </div>
+
+
+
                 <button style="display : none" type="submit" class="btn btn-primary">Reserver</button>
             </form>
         </div>
@@ -178,6 +182,8 @@
         var label3 = document.getElementById("label3");
         var xhttpProf = new XMLHttpRequest();
         var WhereInTheForm = "";
+        var allNameDate = [];
+        
 
         // recuperé les requete XML 
         xhttpProf.onreadystatechange = function() {
@@ -286,36 +292,47 @@
 
 
         function changeSelect3(allDate){
-
+            allNameDate = [];
 
             var today = new Date().toISOString().split('T')[0];
             select3.setAttribute('min', today);
 
 
-
-
-            // Récupération des éléments du calendrier et des jours disponibles
-            
-            // var availableDays = ['lundi', 'mercredi'];
-
-            // // Désactivation des dates qui ne correspondent pas aux jours disponibles
-            // $(select3).find('.datepicker td').not('.disabled').each(function() {
-            //     var date = new Date($(this).data('date'));
-            //     var day = date.toLocaleDateString('fr-FR', { weekday: 'long' });
-            //     if (availableDays.indexOf(day) === -1) {
-            //         $(this).addClass('disabled');
-            //     }
-            // });
-
+            console.log(allDate)
 
             select3.style.display = "block";
             label3.style.display = "block";
 
             
-
+            for(day in allDate){
+                allNameDate.push(day) ;
+                console.log(day);
+            }
+            console.log(allNameDate);
         }
 
 
+
+        select3.addEventListener("change", detecteSelect3);
+        function detecteSelect3() {
+            var date = new Date(select3.value);
+            choixdate = date.getDay();
+            console.log(choixdate);
+
+            let dictionnaire = {
+                0: "dimanche",
+                1: "lundi",
+                2: "mardi",
+                3: "mercredi",
+                4: "jeudi",
+                5: "vendredi",
+                6: "samedi",
+            };
+
+
+
+
+        }
 
 
     </script>
