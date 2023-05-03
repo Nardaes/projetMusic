@@ -16,23 +16,36 @@ $request_method = strtoupper($_SERVER['REQUEST_METHOD']);
 
 if ($request_method === 'POST'){
     if (isset($_POST['envoyer'])){
-        try {
-        $nom = $_POST['exampleInputNom1'];
-        $email = $_POST['exampleInputEmail1']; 
-        $adresse = $_POST['exampleInputAdressePostal1'];
-        $password = password_hash($_POST['exampleInputPassword1'], PASSWORD_DEFAULT);
+        // $stmt = $pdo->prepare('INSERT INTO utilisateur (nom_U, adresse_U, mdp_U, mail_U) VALUES (:nom, :adresse, :password, :email)');
+            try {
+            $nom = $_POST['exampleInputNom1'];
+            $email = $_POST['exampleInputEmail1']; 
+            $adresse = $_POST['exampleInputAdressePostal1'];
+            $password = password_hash($_POST['exampleInputPassword1'], PASSWORD_DEFAULT);
 
-        $stmt = $pdo->prepare('INSERT INTO utilisateur (nom_U, adresse_U, mdp_U, mail_U) VALUES (:nom, :adresse, :password, :email)');
-        $stmt->bindParam(':nom', $nom);
-        $stmt->bindParam(':adresse', $adresse);
-        $stmt->bindParam(':password', $password);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
+            $stmt = $pdo->prepare('INSERT INTO utilisateur (nom_U, adresse_U, mdp_U, mail_U) VALUES (:nom, :adresse, :password, :email)');
+            $stmt->bindParam(':nom', $nom);
+            $stmt->bindParam(':adresse', $adresse);
+            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
 
-            header('Location: index.php');
-        } catch (PDOException $e) {
-            echo 'Erreur : ' . $e->getMessage();
-        }
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            var_dump($result);
+
+            session_start([
+                'cookie_lifetime' => 86400,
+            ]);
+            $_SESSION['connected'] = TRUE;
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_email'] = email;
+            $_SESSION['user_nom'] = $nom;
+
+
+                // header('Location: index.php');
+            } catch (PDOException $e) {
+                echo 'Erreur : ' . $e->getMessage();
+            }
     }
 }
 ?>
@@ -79,15 +92,15 @@ if ($request_method === 'POST'){
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
+                        <a href="index.php" class="logo">
                             <img src="assets/images/logo.png">
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="index.html" class="active">Accueil</a></li>
+                            <li class="scroll-to-section"><a href="index.php" class="active">Accueil</a></li>
                             <li class="scroll-to-section"><a href="reservation.php">Réservation</a></li>
-                            <li class="scroll-to-section"><a href="login.html">Connexion</a></li>                    
+                            <li class="scroll-to-section"><a href="login.php">Inscription</a></li>                    
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -146,52 +159,12 @@ if ($request_method === 'POST'){
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="first-item">
-                        <div class="logo">
-                            <img src="assets/images/white-logo.png" alt="hexashop ecommerce templatemo">
-                        </div>
-                        <ul>
-                            <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
-                            <li><a href="#">hexashop@company.com</a></li>
-                            <li><a href="#">010-020-0340</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <h4>Shopping &amp; Categories</h4>
-                    <ul>
-                        <li><a href="#">Men’s Shopping</a></li>
-                        <li><a href="#">Women’s Shopping</a></li>
-                        <li><a href="#">Kid's Shopping</a></li>
-                    </ul>
-                </div>
-                    <div class="col-lg-3">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><a href="#">Homepage</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Help</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                        </ul>
-                    </div>
-                <div class="col-lg-3">
-                    <h4>Help &amp; Information</h4>
-                    <ul>
-                        <li><a href="#">Help</a></li>
-                        <li><a href="#">FAQ's</a></li>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Tracking ID</a></li>
-                    </ul>
-                </div>
                 <div class="col-lg-12">
                     <div class="under-footer">
-                        <p>Copyright © 2022 HexaShop Co., Ltd. All Rights Reserved. 
+                        <p>Copyright © 2023 Moukxico Co., Ltd. All Rights Reserved. 
                         <ul>
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
                         </ul>
                     </div>
                 </div>
