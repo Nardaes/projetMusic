@@ -42,7 +42,7 @@ if ($request_method === 'POST'){
             $_SESSION['user_nom'] = $nom;
 
 
-                // header('Location: index.php');
+            header('Location: index.php');
             } catch (PDOException $e) {
                 echo 'Erreur : ' . $e->getMessage();
             }
